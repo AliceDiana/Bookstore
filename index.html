@@ -1,0 +1,147 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Bookstore</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <!-- fancybox -->
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  </head>
+
+  <body>
+   
+     
+        <div id="booksdisplay"></div>
+
+        <script type="text/babel">
+          class Booksdisplay extends React.Component {
+            constructor(props) {
+              super(props);
+              this.state = {
+                initialBooks: [],
+                books: []
+              };
+            }
+
+            componentDidMount() {
+              fetch("https://api.myjson.com/bins/zyv02")
+                .then(response => {
+                  return response.json();
+                })
+                .then(data => {
+                  this.setState({
+                    initialBooks: data.books,
+                    books: data.books
+                  });
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            }
+
+            filterList = event => {
+              let books = this.state.initialBooks;
+              books = books.filter(book => {
+                return (
+                  book.title
+                    .toLowerCase()
+                    .search(event.target.value.toLowerCase()) !== -1
+                );
+              });
+              this.setState({ books: books });
+            };
+
+            render() {
+              return (
+                <div className="container">
+                  <header>
+                    <div className="logo">
+                      <img src="./style/logo.png" alt="logo" className="logo" />
+                    </div>
+                    <form>
+                      <input 
+                        type="text"
+                        className="searchbox"
+                        placeholder="Search"
+                        onChange={this.filterList}
+                      />
+                    </form>
+                  </header>
+                  <main>
+                        <div className="d-flex flex-wrap justify-content-around">
+                          {this.state.books.map((book, index) => {
+                            return (
+                              <div className="cardcontainer" key={index}>
+                                <div className="thecard">
+                                  <div className="thefront">
+                                    <img
+                                      className="bookcover"
+                                      src={book.cover}
+                                      alt="book"
+                                    />
+                                  </div>
+                                  <div className="theback">
+                                    <h6 className="title">{book.title}</h6>
+                                    <p className="description">{book.description} </p>
+                                    <a
+                                      className="cover"
+                                      data-fancybox="gallery"
+                                      href={book.detail}
+                                      data-caption={book.title}
+                                    >
+                                      <button>Details</button>
+                                    </a>
+                                  </div>
+                                </div>
+                          </div>
+                            );
+                          })}
+                  </div>
+                  </main>
+
+                  <footer className="page-footer text-center py-1 fixed">
+                    <p className="paragraphFooter">© 2019 Copyright: Alice Diana</p>
+                  </footer>
+                </div>
+              );
+            }
+          }
+
+          ReactDOM.render(
+            <Booksdisplay />,
+            document.getElementById("booksdisplay")
+          );
+        </script>
+     
+
+
+      <script
+        crossorigin
+        src="https://unpkg.com/react@16/umd/react.development.js"
+      ></script>
+
+      <script
+        crossorigin
+        src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      ></script>
+    </div>
+  </body>
+</html>

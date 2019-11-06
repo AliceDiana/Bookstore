@@ -1,0 +1,113 @@
+html {
+  margin-top: 20px;
+}
+/* 
+header style  */
+
+header {
+  display: flex;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+
+header > div:nth-child(2) {
+  margin-left: auto;
+}
+
+.logo {
+  width: 40%;
+}
+
+.searchbox {
+  position: absolute;
+  top: 50px;
+  right: 235px;
+  border-radius: 30px;
+  width: 172px;
+  height: 37px;
+  padding: 10px;
+}
+
+/* set margin for book display */
+.showbooks {
+  margin-top: 20px;
+}
+
+/* flip card  */
+
+.cardcontainer {
+  position: relative;
+  width: 200px;
+  height: 290px;
+  margin-bottom: 10px;
+}
+
+.thecard {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+.thecard:hover {
+  transform: rotateY(180deg);
+}
+
+.thefront {
+  /* 
+styling for front of the card */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.bookcover {
+  width: 100%;
+  height: 100%;
+}
+
+.theback {
+  /* 
+  styling for back of the card */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: lightgrey;
+  color: black;
+  transform: rotateY(180deg);
+  text-align: center;
+  font-size: 10px;
+}
+
+.title {
+  /* title of the books */
+  font-size: 18px;
+  margin-top: 45px;
+  text-transform: capitalize;
+}
+.description {
+  font-size: 12px;
+  margin-top: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+  text-align: center;
+}
+
+/* footer styling */
+
+footer {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-top: 1px solid black;
+}
+
+.paragraphFooter {
+  margin-top: 8px;
+  font-style: italic;
+}
